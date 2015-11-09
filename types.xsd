@@ -1,17 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:xml="http://www.w3.org/XML/1998/namespace" targetNamespace="http://purl.org/net/elmo"
-	xmlns="http://purl.org/net/elmo" elementFormDefault="qualified">
-
-	<xs:import schemaLocation="http://www.w3.org/2001/03/xml.xsd"
-		namespace="http://www.w3.org/XML/1998/namespace" />
-
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns="http://purl.org/net/emrex" targetNamespace="http://purl.org/net/emrex" elementFormDefault="qualified">
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/03/xml.xsd"/>
 	<!-- This schema defines some common type definitions reused in other schemas -->
 
+	<xs:include schemaLocation="emrex_ENUM.xsd"/>
+
+	<!-- Base type for the identifiers -->
+	<xs:simpleType name="IDType">
+		<xs:restriction base="xs:string"></xs:restriction>
+	</xs:simpleType>	
+
+	<xs:complexType name="Identifier">
+		<xs:simpleContent>
+			<xs:extension base="IDType">
+			<xs:attribute name="type" type="IDType" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="IssuerIdentifier">
+		<xs:simpleContent>
+		   <xs:restriction base="Identifier">
+			   <xs:attribute name="type" type="IssuerTypeEnum" use="required"/>
+		   </xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="LearnerIdentifier">
+		<xs:simpleContent>
+		   <xs:restriction base="Identifier">
+			   <xs:attribute name="type" type="LearnerTypeEnum" use="required"/>
+		   </xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+		<xs:complexType name="LOSIdentifier">
+		<xs:simpleContent>
+		   <xs:restriction base="Identifier">
+			   <xs:attribute name="type" type="LOSTypeEnum" use="required"/>
+		   </xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	
 	<xs:complexType name="SimpleLiteral">
 		<xs:simpleContent>
 			<xs:extension base="xs:string">
-				<xs:attribute ref="xml:lang" use="optional" />
+				<xs:attribute ref="xml:lang" use="optional"/>
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
@@ -19,78 +53,43 @@
 	<xs:complexType name="TypedLiteral">
 		<xs:simpleContent>
 			<xs:extension base="xs:string">
-				<xs:attribute name="type" use="optional" />
+				<xs:attribute name="type" use="optional"/>
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
-
+	
 	<xs:complexType name="Description" mixed="true">
 		<xs:sequence>
-			<xs:any minOccurs="0" processContents="lax"/>
+			<xs:any processContents="lax" minOccurs="0"/>
 		</xs:sequence>
-		<xs:attribute ref="xml:lang" use="optional" />
-		<xs:attribute name="href" type="xs:anyURI" use="optional" />
+		<xs:attribute ref="xml:lang" use="optional"/>
+		<xs:attribute name="href" type="xs:anyURI" use="optional"/>
 	</xs:complexType>
-
-	<xs:complexType name="DateAndTimeInformation">
-		<xs:simpleContent>
-			<xs:extension base="xs:string">
-				<xs:attribute name="dtf" use="optional" />
-			</xs:extension>
-		</xs:simpleContent>
-	</xs:complexType>
-
 	<xs:complexType name="Duration">
 		<xs:simpleContent>
 			<xs:extension base="xs:string">
-				<xs:attribute name="interval" use="optional" />
+				<xs:attribute name="interval" use="optional"/>
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
-
 	<xs:complexType name="elmoDuration">
 		<xs:simpleContent>
 			<xs:extension base="xs:string">
-				<xs:attribute name="duration" use="optional" type="xs:duration" />
+				<xs:attribute name="duration" type="xs:duration" use="optional"/>
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
-
 	<xs:complexType name="LearningOutcome">
 		<xs:simpleContent>
 			<xs:extension base="xs:string">
 				<xs:attribute ref="xml:lang"/>
-				<xs:attribute name="href" type="xs:anyURI" use="optional" />
+				<xs:attribute name="href" type="xs:anyURI" use="optional"/>
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
-	
-	<xs:complexType name="Attachment">
-		<xs:simpleContent>
-			<xs:extension base="xs:string">
-				<xs:attribute name="desc" type="xs:string" use="optional" />
-				<xs:attribute name="name" type="xs:string" use="optional" />
-				<xs:attribute name="contentType" type="xs:string" use="optional" />
-				<xs:attribute name="ref" type="xs:string" use="optional" />
-			</xs:extension>
-		</xs:simpleContent>
-	</xs:complexType>
-	
-	<!-- Human sex, conforms to ISO/IEC 5218:2004. -->
-	<xs:simpleType name="Gender">
-		<xs:restriction base="xs:integer">
-			<xs:minInclusive value="0"/>
-			<xs:maxInclusive value="9"/>
+	<xs:simpleType name="dataURI">
+		<xs:restriction base="xs:anyURI">
+			<xs:pattern value="data:.+"/>
 		</xs:restriction>
 	</xs:simpleType>
-	
-	<!-- Study levels: Bachelor (1) Master (2) Ph.D (3) Any (4) -->
-	<xs:simpleType name="Level">
-		<xs:restriction base="xs:integer">
-			<xs:minInclusive value="1"/>
-			<xs:maxInclusive value="4"/>
-		</xs:restriction>
-	</xs:simpleType>
-	
 </xs:schema>
-  
