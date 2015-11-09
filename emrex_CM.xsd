@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns="http://purl.org/net/emrex" targetNamespace="http://purl.org/net/emrex" elementFormDefault="qualified">
+	<xs:include schemaLocation="types.xsd"/>
+	<!-- Classes extended from CM -->
+	<xs:complexType name="Credit">
+		<xs:sequence>
+			<xs:element name="scheme" type="SimpleLiteral" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="level" type="LevelEnum" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="value" type="SimpleLiteral" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

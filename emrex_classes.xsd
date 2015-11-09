@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns="http://purl.org/net/emrex" targetNamespace="http://purl.org/net/emrex" elementFormDefault="qualified">
+	<xs:include schemaLocation="types.xsd"/>
+	<!-- Classes created in EMREX -->
+	<xs:complexType name="Attachment">
+		<xs:sequence>
+			<xs:element name="title" type="SimpleLiteral" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="type" type="SimpleLiteral" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="description" type="SimpleLiteral" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="url" type="xs:anyURI" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="hasFormat" type="dataURI" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ShortenedGradingTable">
+		<xs:sequence>
+			<xs:element name="percentageLower" type="xs:double" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="percentageEqual" type="xs:double" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="percentageHigher" type="xs:double" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

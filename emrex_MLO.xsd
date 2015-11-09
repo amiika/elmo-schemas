@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns="http://purl.org/net/emrex" targetNamespace="http://purl.org/net/emrex" elementFormDefault="qualified">
+	<xs:include schemaLocation="types.xsd"/>
+	<xs:include schemaLocation="emrex_ELMO.xsd"/>
+	<xs:include schemaLocation="emrex_ENUM.xsd"/>
+	<xs:include schemaLocation="emrex_classes.xsd"/>
+	<!-- Classes extended from MLO -->
+	<xs:complexType name="LearningOpportunityInstance">
+		<xs:sequence>
+			<xs:element name="title" type="SimpleLiteral" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="start" type="xs:dateTime" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="date" type="xs:date" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="duration" type="SimpleLiteral" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="result" type="Result" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LearningOpportunitySpecification">
+		<xs:sequence>
+			<xs:element name="identifier" type="LOSIdentifier" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="title" type="SimpleLiteral" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="description" type="SimpleLiteral" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="type" type="LOSEnum" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="qualification" type="Qualification" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="credit" type="Credit" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="learningOpportunityInstance" type="LearningOpportunityInstance" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="hasPart" type="LearningOpportunitySpecificationAssociation" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LearningOpportunitySpecificationAssociation">
+		<xs:sequence>
+			<xs:element name="learningOpportunitySpecification" type="LearningOpportunitySpecification" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

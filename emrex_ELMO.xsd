@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns="http://purl.org/net/emrex" targetNamespace="http://purl.org/net/emrex" elementFormDefault="qualified">
+	<xs:include schemaLocation="types.xsd"/>
+	<xs:include schemaLocation="emrex_MLO.xsd"/>
+	<xs:include schemaLocation="emrex_ELM.xsd"/>
+	<xs:include schemaLocation="emrex_CM.xsd"/>
+	<xs:include schemaLocation="emrex_classes.xsd"/>
+	<xs:include schemaLocation="EUROPASS_ISOLanguages_V1.1.xsd"/>
+	<!--  Classes restricted and extended from ELMO schema -->
+	<xs:complexType name="Report">
+		<xs:sequence>
+			<xs:element name="learner" type="Learner" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="issuer" type="Issuer" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="learningOpportunitySpecification" type="LearningOpportunitySpecification" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="additionalLanguage" type="motherCode" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="issueDate" type="xs:date" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="hasAttachment" type="AttachmentAssociation" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AttachmentAssociation">
+		<xs:sequence>
+			<xs:element name="attachment" type="Attachment"/>
+		</xs:sequence>
+	</xs:complexType>
+		<xs:complexType name="Result">
+		<!-- Added complex type as in EMREX AP -->
+			<xs:sequence>
+				<xs:element name="additionalInformation" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="gradingScheme" type="xs:string" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="shortenedGrading" type="ShortenedGradingTable" minOccurs="0" maxOccurs="1"/>
+				<xs:element name="resultDistribution" type="ResultDistribution" minOccurs="0" maxOccurs="1"/>
+			</xs:sequence>
+			<xs:attribute name="value" type="xs:string" use="required"/>
+			<xs:attribute name="number" type="xs:decimal" use="required"/>
+			<!-- Scheme is defined in LOS -->
+	</xs:complexType>
+	<xs:complexType name="ResultDistribution">
+		<xs:sequence>
+			<xs:element name="category" type="Category" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="description" type="Description" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="url" type="SimpleLiteral" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Category">
+		<xs:attribute name="url" type="xs:anyURI" use="optional"/>
+		<xs:attribute name="label" use="required"/>
+		<xs:attribute name="count" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="Qualification">
+		<xs:sequence>
+			<xs:element name="identifier" type="QualificationTypeEnum" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="title" type="SimpleLiteral" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="level" type="LevelEnum" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="qualificationHolder" type="SimpleLiteral" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="qualificationMainStudyField" type="SimpleLiteral" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

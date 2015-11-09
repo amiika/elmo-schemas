@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns="http://purl.org/net/emrex" targetNamespace="http://purl.org/net/emrex" elementFormDefault="qualified">
+	<xs:include schemaLocation="types.xsd"/>
+	<xs:include schemaLocation="emrex_ENUM.xsd"/>
+	<xs:include schemaLocation="EUROPASS_ISOCountries_V1.1.xsd"/>
+	<!-- Classes extended from ELM -->
+	<xs:complexType name="Learner">
+		<xs:sequence>
+			<xs:element name="identifier" type="LearnerIdentifier" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="fullName" type="SimpleLiteral" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="givenNames" type="SimpleLiteral" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="familyName" type="SimpleLiteral" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="bday" type="xs:date" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="gender" type="GenderEnum" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Issuer">
+		<xs:sequence>
+			<xs:element name="identifier" type="IssuerIdentifier" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="localIdentifier" type="Identifier" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="title" type="SimpleLiteral" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="type" type="IssuerEnum" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="nationality" type="countryCode" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="url" type="SimpleLiteral" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

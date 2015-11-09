@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns="http://purl.org/net/emrex" targetNamespace="http://purl.org/net/emrex" elementFormDefault="qualified">
+	<xs:include schemaLocation="emrex_ELMO.xsd"/>
+	<xs:annotation>
+		<xs:documentation>
+			Implementation of EMREX application profile: https://confluence.csc.fi/display/EMREX/Model
+		</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="emrex_base">
+		<xs:sequence>
+			<xs:element name="report" type="Report" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ResultExchange" type="emrex_base"/>
+</xs:schema>
